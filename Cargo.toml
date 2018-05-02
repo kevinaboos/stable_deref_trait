@@ -15,3 +15,7 @@ An unsafe marker trait for types like Box and Rc that dereference to a stable ad
 default = ["std"]
 std = []
 alloc = []
+
+[dependencies.spin]
+version = "0.4.5"
+optional = true

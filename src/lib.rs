@@ -24,6 +24,9 @@ extern crate core;
 #[cfg(feature = "alloc")]
 extern crate alloc;
 
+#[cfg(feature = "spin")]
+extern crate spin;
+
 use core::ops::Deref;
 
 
@@ -162,6 +165,9 @@ use alloc::string::String;
 
 #[cfg(feature = "std")]
 use std::sync::{MutexGuard, RwLockReadGuard, RwLockWriteGuard};
+#[cfg(feature = "spin")]
+use spin::{MutexGuard, RwLockReadGuard, RwLockWriteGuard};
+
 
 #[cfg(feature = "std")]
 use std::cell::{Ref, RefMut};
@@ -189,11 +195,11 @@ unsafe impl<T: ?Sized> CloneStableDeref for Arc<T> {}
 unsafe impl<'a, T: ?Sized> StableDeref for Ref<'a, T> {}
 // #[cfg(any(feature = "std", feature = "alloc"))]
 unsafe impl<'a, T: ?Sized> StableDeref for RefMut<'a, T> {}
-#[cfg(feature = "std")]
+#[cfg(any(feature = "std", feature = "spin"))]
 unsafe impl<'a, T: ?Sized> StableDeref for MutexGuard<'a, T> {}
-#[cfg(feature = "std")]
+#[cfg(any(feature = "std", feature = "spin"))]
 unsafe impl<'a, T: ?Sized> StableDeref for RwLockReadGuard<'a, T> {}
-#[cfg(feature = "std")]
+#[cfg(any(feature = "std", feature = "spin"))]
 unsafe impl<'a, T: ?Sized> StableDeref for RwLockWriteGuard<'a, T> {}
 
 unsafe impl<'a, T: ?Sized> StableDeref for &'a T {}

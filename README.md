@@ -8,7 +8,7 @@ Enable the "alloc" feature (with default-features disabled) to have this trait b
 * `alloc::boxed::Box`
 * `alloc::vec::Vec`
 * `alloc::rc::Rc`
-* `alloc::arc::Arc`
+* `alloc::sync::Arc`
 * `alloc::string::String`
 
 For example, this crate can be built with alloc support via the following command:
@@ -21,3 +21,8 @@ version = "<version>"
 default-features = false
 features = [ "alloc" ]
 ```
+
+Enable the "spin" feature (with default-features disabled) to have this trait be implemented for the following types from the [spin](https://crates.io/crates/spin) crate:
+* `spin::MutexGuard`
+* `spin::RwLockReadGuard`
+* `spin::RwLockWriteGuard`
